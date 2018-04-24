@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import vueI18n from 'vue-i18n';
 import elementUI from 'element-ui';
-
+import store from './store'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'expose-loader?_!lodash';
 import 'font-awesome/css/font-awesome.min.css';
@@ -45,6 +45,7 @@ router.then((r) => {
     el: '#app',
     router:r ,
     i18n,
+    store,
     components: { App },
     template: '<App/>'
   })

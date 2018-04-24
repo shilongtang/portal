@@ -175,7 +175,9 @@ export default new Promise((resolve, reject) => {
     });
     const whiteList = ['/login'];
     router.beforeEach((to, from, next) => {
-      if(false){ //若token获取成功，说明登录成功，则继续（此处获取登录信息来校验）
+     const storage = window.sessionStorage;
+      let item = storage.getItem('userData');
+      if(item != null){ //若token获取成功，说明登录成功，则继续（此处获取登录信息来校验）
         /*getUser()*/
         next();
       } else { //否则，排除白名单中路径，以免死循环，进入登录页

@@ -3,11 +3,14 @@ export default {
         userData: null
     },
     getters:{
-    
+      cityCompany(state){
+        return state.userData;
+      },
     },
+
     mutations:{
-        setUserData(state){
-        state.userData = JSON.parse(sessionStorage.getItem('userData'));
+        setUserData(state, data){
+          state.userData = data;
         }
     }
 }
