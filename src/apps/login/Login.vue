@@ -1,9 +1,6 @@
 <template>
 	<div id="login">
-		<router-link to="/menu">
-			<div class="back" @click="back()"></div>			
-		</router-link>
-
+			<div class="back" @click="back()"></div>
 		<div class="login-box">
 			<div class="logo"></div>
 			<form>
@@ -27,18 +24,15 @@
 				</div>
 			</form>
 		</div>
-		<v-dialog v-show="dialog" :dialog-msg="dialogMsg" @confirm="confirm"></v-dialog>
 	</div>
 </template>
 
 <script>
 
-import dialog from '@/components/Dialog'
+//import dialog from '@/components/Dialog'
 
 export default {
-	components: {
-		'v-dialog': dialog
-	},
+	components: {},
 	props: {
 		login: {
 			type: Boolean
@@ -56,22 +50,18 @@ export default {
 			password: '',
 			userid: '',
 			dialog: false,
-			dialogMsg: ''
 		}
 	},
-	
+
 	methods: {
-		confirm() {
-			this.dialog = false
-		},
 		back() {
+      history.go(-1);
 			this.$emit('back')
 		},
 		Login() {
 			if (this.admin) {
 				if (!this.userid || !this.username || !this.password) {
 					this.dialog = true
-					this.dialogMsg = '请填写完整'
 					return
 				}
 				var user = {
@@ -79,61 +69,19 @@ export default {
 					username: this.username,
 					password: this.password
 				}
-				$.ajax({
-					url: 'http://hjingren.cn/thinkphp/index.php/admin/Login/login',
-					type: 'post',
-					dataType: 'json',
-					data: user,
-					success: (res) => {
-						console.log(res)
-						if (res.success) {
-							this.userid = ''
-							this.username = ''
-							this.password = ''
-							sessionStorage.id = res.data.id
-							sessionStorage.userid = res.data.unumber
-							sessionStorage.name = res.data.name
-							sessionStorage.phone = res.data.phone
-							this.$router.push('/matters')
-						} else {
-							alert('用户名或密码出错')
-						}					
-					}
-				});
-				return
 			}
-			
+
 			if (this.customer) {
 				if (!this.username || !this.password) {
 					this.dialog = true
-					this.dialogMsg = '请填写完整'
 					return
 				}
 				var user = {
 					username: this.username,
 					password: this.password
 				}
-				$.ajax({
-					url: 'http://hjingren.cn/thinkphp/index.php/home/Login/login',
-					type: 'post',
-					dataType: 'json',
-					data: user,
-					success: (res) => {
-						console.log(res)
-						if (res.success) {
-							this.username = ''
-							this.password = ''
-							sessionStorage.id = res.data.uid
-							sessionStorage.name = res.data.username
-							sessionStorage.phone = res.data.phone
-							this.$router.push('/matters')
-						} else {
-							alert('用户名或密码出错')
-						}						
-					}
-				});
 			}
-			
+
 		}
 	}
 }
@@ -151,14 +99,14 @@ export default {
 	top: 20px;
 	width: 30px;
 	height: 30px;
-	background: url('../assets/images/back.png') no-repeat;
+	background: url('../../assets/images/back.png') no-repeat;
 	background-size: cover;
 	cursor: pointer;
 }
 
 .gv {
 	text-decoration: none;
-    background: url('../assets/images/nav_gv.png') repeat 0px 0px;
+    background: url('../../assets/images/nav_gv.png') repeat 0px 0px;
     width: 130px;
     height: 43px;
     display: block;
@@ -170,8 +118,8 @@ export default {
     font: 18px/43px 'microsoft yahei';
     color: #066197;
 }
-a.gv:hover { 
-	background: url('../assets/images/nav_gv.png') repeat 0px -43px; 
+a.gv:hover {
+	background: url('../../assets/images/nav_gv.png') repeat 0px -43px;
 	color:#1d7eb8;
 	-webkit-box-shadow: 0 0 6px #1d7eb8;
 	transition-duration: 0.5s;
@@ -191,7 +139,7 @@ a.gv:hover {
 	width: 270px;
 	height: 108px;
 	margin-bottom: 20px;
-	background: url('../assets/images/logo.png') no-repeat;
+	background: url('../../assets/images/logo.png') no-repeat;
 	background-size: cover;
 }
 .ipunt-wrap label{
@@ -203,13 +151,13 @@ a.gv:hover {
 	background-size: cover;
 }
 .icon-id{
-	background: url('../assets/images/id.png') no-repeat;
+	background: url('../../assets/images/id.png') no-repeat;
 }
 .icon-user{
-	background: url('../assets/images/user.png') no-repeat;
+	background: url('../../assets/images/user.png') no-repeat;
 }
 .icon-password{
-	background: url('../assets/images/password.png') no-repeat;
+	background: url('../../assets/images/password.png') no-repeat;
 }
 
 .ipunt-wrap input{

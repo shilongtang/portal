@@ -8,7 +8,7 @@
             <router-link to="/customer-login">
               <a class="gv" href="javascript:;" @click="customerLogin()">客户登录</a>
             </router-link>
-            <router-link :to="{name:'Menu',params:{id:1}}">
+            <router-link :to="{name:nameList.menu_1,params:{id:1}}">
               <a class="gv" href="avascript:;" @click="adminLogin()">管理员登录</a>
             </router-link>
           </div>
@@ -25,12 +25,13 @@
 
 <script>
   import {Stats} from './hovertreewelcome';
-
+  import nameList from './constant';
   const storage = window.sessionStorage;
   import {mapMutations} from 'vuex';
   export default {
     data(){
       return{
+        nameList,
         login: false,
         customer: false,
         admin: false
@@ -398,7 +399,7 @@
         document.removeEventListener('touchstart', {});
         this.$store.commit('setUserData', JSON.stringify(new Date()));
         //this.$store.commit('setUserData',JSON.stringify(new Date()));
-       storage.setItem('userData', JSON.stringify(new Date()));
+       //storage.setItem('userData', JSON.stringify(new Date()));
         this.admin = true;
       },
       back() {

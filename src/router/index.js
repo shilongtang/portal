@@ -7,7 +7,10 @@ import menuListPage from '../components/menuList';
 import menuTab from '../components/menuTab';
 import apps from '../apps';
 import config from '../config';
-import login from '../apps/login/desktop.vue'
+import login from '../apps/login/desktop.vue';
+
+import login1 from '../apps/login/Login.vue'
+
 //import commons from '../utils/treeUtils';
 import index from '../apps/index/desktop';
 import HelloWorld from '../components/HelloWorld'
@@ -165,12 +168,19 @@ export default new Promise((resolve, reject) => {
           redirect:'index',
           component: layout,
           children: routerList,
+        },
+        {
+          name: 'login1',
+          path: '/login1',
+          hidden:true,
+          component: login1
         },{
           name: 'login',
           path: '/login',
           hidden:true,
           component: login
-        }
+        },
+
       ],
     });
     const whiteList = ['/login'];
@@ -184,7 +194,16 @@ export default new Promise((resolve, reject) => {
         if (whiteList.indexOf(to.path) !== -1) { // 在登录白名单，直接进入
           next();
         } else {
-          next('/login');
+          debugger
+          if(to.name === "login1"){
+            next();
+          }else{
+            next('/login');
+          }
+          console.log(to);
+          console.log(from);
+          console.log(next);
+
         }
       }
     })
