@@ -16,7 +16,7 @@
       </transition>
 
       <transition name="fade-in">
-        <router-view :customer="customer" :login="login" @back="back" :admin="admin"></router-view>
+        <router-view  :customer="customer" :login="login" @back="back" :admin="admin"></router-view>
       </transition>
       <div class="city"></div>
       <div class="moon"></div>
@@ -586,5 +586,19 @@
     background: url('../../assets/images/moon.png') no-repeat;
     background-size: cover;
   }
+  .fade-out-enter-active, .fade-out-leave-active {
+    transition: all .5s
+  }
+  .fade-out-enter, .fade-out-leave-active {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
 
+  .fade-in-enter-active, .fade-in-leave-active {
+    transition: all .5s
+  }
+  .fade-in-enter, .fade-in-leave-active {
+    opacity: 0;
+    transform: translateX(400px);
+  }
 </style>

@@ -168,17 +168,17 @@ export default new Promise((resolve, reject) => {
           redirect:'index',
           component: layout,
           children: routerList,
-        },
-        {
-          name: 'login1',
-          path: '/login1',
-          hidden:true,
-          component: login1
         },{
           name: 'login',
           path: '/login',
           hidden:true,
-          component: login
+          component: login,
+          children : [{
+            name: 'login1',
+            path: '/login1',
+            hidden:true,
+            component:  resolve => require(['@/apps/login/Login.vue'],resolve)
+          }]
         },
 
       ],

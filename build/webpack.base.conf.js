@@ -39,7 +39,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'),resolve('node_modules/_element-ui@2.3.4@element-ui')]
+        include: [resolve('src'), resolve('test'),resolve('node_modules/_element-ui@2.3.6@element-ui')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

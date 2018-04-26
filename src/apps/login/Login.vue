@@ -1,5 +1,5 @@
 <template>
-	<div id="login">
+	<div class="loginStyle">
 			<div class="back" @click="back()"></div>
 		<div class="login-box">
 			<div class="logo"></div>
@@ -88,10 +88,11 @@ export default {
 </script>
 
 <style scoped>
-#login {
-	height: 100%;
-	overflow: hidden;
-	position: relative;
+.loginStyle{
+  position:fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 .back{
 	position: fixed;
