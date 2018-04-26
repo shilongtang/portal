@@ -180,7 +180,6 @@ export default new Promise((resolve, reject) => {
             component:  resolve => require(['@/apps/login/Login.vue'],resolve)
           }]
         },
-
       ],
     });
     const whiteList = ['/login'];
@@ -194,7 +193,7 @@ export default new Promise((resolve, reject) => {
         if (whiteList.indexOf(to.path) !== -1) { // 在登录白名单，直接进入
           next();
         } else {
-          debugger
+        //  debugger
           if(to.name === "login1"){
             next();
           }else{
