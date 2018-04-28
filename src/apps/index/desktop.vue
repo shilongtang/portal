@@ -1,7 +1,11 @@
 <template>
+  <panel>
     <div id="home">
-      <canvas id="canvas" class="canvas"></canvas>
+     <!-- <canvas id="canvas" class="canvas"></canvas>-->
+      <el-input id = "xxx"></el-input>
+      <el-button @click="buttonClick">xxxx</el-button>
     </div>
+  </panel>
 </template>
 
 <script>
@@ -14,7 +18,16 @@
 
       }
     },
-    mounted() {
+    mounted(){
+
+    },
+    methods:{
+      buttonClick(){
+        console.log($("#xxx").val());
+        this.$message.success('...'+$("#xxx").val());
+      }
+    },
+   /* mounted() {
       const _this = this;
       _this.dialogVisible = true;
       var ctx,  hue, logo,  form,  buffer, target = {}, tendrils = [],  settings = {};
@@ -280,280 +293,9 @@
         settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
         document.body.appendChild(ctx.stats.domElement);
       }
-    /*  console.log(Stats());
-      console.log(Stats);
-      var canvas = document.querySelector('canvas'),
-        ctx = canvas.getContext('2d')
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      ctx.lineWidth = .3;
-      ctx.strokeStyle = (new Color(150)).style;
-
-      // var mousePosition = {
-      // 	x: 30 * canvas.width / 100,
-      // 	y: 30 * canvas.height / 100
-      // };
-      var mousePosition = {
-        x:  canvas.width - 100,
-        y:  canvas.height - 60
-      };
-
-      var dots = {
-        nb: 250,
-        distance: 100,
-        d_radius: 150,
-        array: []
-      };
-
-      function colorValue(min) {
-        return Math.floor(Math.random() * 255 + min);
-      }
-
-      function createColorStyle(r,g,b) {
-        return 'rgba(' + r + ',' + g + ',' + b + ', 0.8)';
-      }
-
-      function mixComponents(comp1, weight1, comp2, weight2) {
-        return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
-      }
-
-      function averageColorStyles(dot1, dot2) {
-        var color1 = dot1.color,
-          color2 = dot2.color;
-
-        var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
-          g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
-          b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
-        return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
-      }
-
-      function Color(min) {
-        min = min || 0;
-        this.r = colorValue(min);
-        this.g = colorValue(min);
-        this.b = colorValue(min);
-        this.style = createColorStyle(this.r, this.g, this.b);
-      }
-
-      function Dot(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-
-        this.vx = -.5 + Math.random();
-        this.vy = -.5 + Math.random();
-
-        this.radius = Math.random() * 2;
-
-        this.color = new Color();
-      }
-
-      Dot.prototype = {
-        draw: function(){
-          ctx.beginPath();
-          ctx.fillStyle = this.color.style;
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-          ctx.fill();
-        }
-      };
-
-      function createDots(){
-        for(var i = 0; i < dots.nb; i++){
-          dots.array.push(new Dot());
-        }
-      }
-
-      function moveDots() {
-        for(var i = 0; i < dots.nb; i++){
-
-          var dot = dots.array[i];
-
-          if(dot.y < 0 || dot.y > canvas.height){
-            dot.vx = dot.vx;
-            dot.vy = - dot.vy;
-          }
-          else if(dot.x < 0 || dot.x > canvas.width){
-            dot.vx = - dot.vx;
-            dot.vy = dot.vy;
-          }
-          dot.x += dot.vx;
-          dot.y += dot.vy;
-        }
-      }
-
-      function connectDots() {
-        for(var i = 0; i < dots.nb; i++){
-          for(var j = 0; j < dots.nb; j++){
-            var i_dot = dots.array[i];
-            var j_dot = dots.array[j];
-
-            if((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance){
-              if((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius){
-                ctx.beginPath();
-                ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
-                ctx.moveTo(i_dot.x, i_dot.y);
-                ctx.lineTo(j_dot.x, j_dot.y);
-                ctx.stroke();
-                ctx.closePath();
-              }
-            }
-          }
-        }
-      }
-
-      function drawDots() {
-        for(var i = 0; i < dots.nb; i++){
-          var dot = dots.array[i];
-          dot.draw();
-        }
-      }
-
-      function animateDots() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        moveDots();
-        connectDots();
-        drawDots();
-
-        requestAnimationFrame(animateDots);
-      }
-
-      //----------------------跟着鼠标动--------------------
-      document.getElementById('home').addEventListener('mousemove', function(e){
-        mousePosition.x = e.pageX;
-        mousePosition.y = e.pageY;
-      });
-
-      document.getElementById('home').addEventListener('mouseleave', function(e){
-        mousePosition.x = canvas.width / 2;
-        mousePosition.y = canvas.height / 2;
-      });
-      //----------------------跟着鼠标动--------------------
-
-      createDots();
-      requestAnimationFrame(animateDots);*/
-    },
-    methods: {
-    }
+    },*/
   };
 </script>
 
 <style lang="scss" scoped>
-  #home{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    /* box-sizing: border-box; */
-    overflow-x: hidden;
-    background: rgba(7,17,27,0.95);
-  }
-  .full-container {
-    //background: rgb(232, 64, 80);
-    overflow: hidden;
-    position: relative;
-    font-size: 14px;
-    //color: #000000;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    background-size: cover;
-    .main-container {
-      width: 100%;
-      border-top: solid 1px #fff;
-      display: flex;
-      display: -webkit-flex;
-      display: -ms-flex;
-      margin-top: 5px;
-      border-top: 1px solid #fdd100;
-      aside {
-        flex: 1;
-        -webkit-flex: 1;
-        -webkit-box-flex: 1;
-        border-left: solid 1px #fdd100;
-        min-width: 300px;
-        min-height: 500px;
-        ul {
-          margin-top: 15px;
-          overflow: auto;
-          display: block;
-          li {
-            position: relative;
-            padding-left: 50px;
-            margin-bottom: 15px;
-            text-align: justify;
-            &:last-child {
-              margin-bottom: 0;
-            }
-            i {
-              position: absolute;
-              left: 0;
-              font-size: 1.6em;
-              border: solid 2px #fff;
-              width: 36px;
-              height: 36px;
-              overflow: hidden;
-              border-radius: 20px;
-              text-align: center;
-              line-height: 30px;
-            }
-          }
-        }
-      }
-      .building-container {
-        flex: 4;
-        -webkit-flex: 4;
-        -webkit-box-flex: 4;
-        margin-right: 15px;
-        overflow: auto;
-        //overflow: auto;
-        .building-cell {
-          display: block;
-          text-align: center;
-          margin: 10px 0;
-          font-size: medium;
-          font-weight: bold;
-          width: 100%;
-          line-height: 30px;
-          height: 30px;
-          border-radius: 15px;
-        }
-        .floor-block {
-          display: flex;
-          display: -webkit-flex;
-          display: -ms-flex;
-          display: -moz-flex;
-
-        }
-        .room-cell {
-          flex: 1;
-          -webkit-flex: 1;
-          -ms-flex: 1;
-          -moz-box-flex: 1;
-        }
-        .room-cell-item {
-          margin-right: 5px;
-          display: inline-block;
-          text-align: center;
-          margin-bottom: 5px;
-        }
-        .floor-cell {
-          text-align: center;
-          padding: 0px 5px;
-          width: 50px;
-          min-width: 50px;
-          margin-right: 5px;
-          display: inline-block;
-          border-top-left-radius: 15px;
-          border-bottom-left-radius: 15px;
-        }
-
-      }
-      .online-number {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-      }
-    }
-  }
-
-
 </style>

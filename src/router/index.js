@@ -9,7 +9,7 @@ import apps from '../apps';
 import config from '../config';
 import login from '../apps/login/desktop.vue';
 
-import login1 from '../apps/login/Login.vue'
+import login1 from '../apps/login/login.vue'
 
 //import commons from '../utils/treeUtils';
 import index from '../apps/index/desktop';
@@ -177,7 +177,7 @@ export default new Promise((resolve, reject) => {
             name: 'login1',
             path: '/login1',
             hidden:true,
-            component:  resolve => require(['@/apps/login/Login.vue'],resolve)
+            component:  resolve => require(['@/apps/login/login.vue'],resolve)
           }]
         },
       ],
@@ -199,10 +199,6 @@ export default new Promise((resolve, reject) => {
           }else{
             next('/login');
           }
-          console.log(to);
-          console.log(from);
-          console.log(next);
-
         }
       }
     })

@@ -10,6 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'expose-loader?_!lodash';
 import 'font-awesome/css/font-awesome.min.css';
 import Panel from './components/panel.vue'; // 项目容器组件
+import $ from 'jquery'
 Vue.config.productionTip = false
 Vue.use(vueI18n);
 Vue.use(elementUI);

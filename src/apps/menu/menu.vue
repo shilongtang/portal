@@ -42,7 +42,7 @@
 
           <el-col :span="24" class="form-wrap">
             <el-form :model="formInline" :rules="rules"  ref="formInline" label-width="100px" :label-position="'left'">
-              <el-form-item label="编码" prop="description" class="item-5">
+              <el-form-item label="编码" prop="code" class="item-5">
                 <el-input v-model="formInline.code" size="small"></el-input>
               </el-form-item>
               <el-form-item label="名称" prop="description" class="item-5">
@@ -247,10 +247,7 @@
       append(data) {
         let _this=this;
         if(_this.sign==true){
-          _this.$message({
-            message: '请先保存新增数据！',
-            type: 'warning'
-          });
+          _this.$message.warning('请先保存新增数据！');
           return;
         }
         if(data.level===5){

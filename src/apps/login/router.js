@@ -1,4 +1,4 @@
-import login from './Login.vue';
+import login from './login.vue';
 import constant from './constant'
 const menuList = [
   {
