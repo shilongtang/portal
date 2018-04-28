@@ -122,7 +122,7 @@ export default {
 <style lang="scss">
   .keyboard1{width:908px;}
   .keyboard2{width:908px;}
-  .keyboard2{width:908px;}
+  .keyboard3{width:908px;}
 .loginStyle{
   position:fixed;
   left: 0;
