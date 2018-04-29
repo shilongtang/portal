@@ -33,24 +33,25 @@
   import {mapMutations} from 'vuex';
   export default {
     data(){
-      return{
+      return {
         nameList,
         login: false,
         customer: false,
-        admin: false
+        admin: false,
+        initTrue: true
 
       }
     },
     mounted() {
-      const _this =this;
+      const _this = this;
       //流星特效
       _this.meteor();
       //宇宙特效
       _this.universe();
       //鼠标跟随特效
       //_this.follow();
-     // const _this = this;
-      var ctx,  hue, logo,  form,  buffer, target = {}, tendrils = [],  settings = {};
+      // const _this = this;
+      var ctx, hue, logo, form, buffer, target = {}, tendrils = [], settings = {};
       settings.debug = true;
       settings.friction = 0.5;
       settings.trails = 20;
@@ -67,6 +68,7 @@
       function Oscillator(options) {
         this.init(options || {});
       }
+
       Oscillator.prototype = (function () {
         var value = 0;
         return {
@@ -94,6 +96,7 @@
       function Tendril(options) {
         this.init(options || {});
       }
+
       Tendril.prototype = (function () {
         function Node() {
           this.x = 0;
@@ -101,6 +104,7 @@
           this.vy = 0;
           this.vx = 0;
         }
+
         return {
           init: function (options) {
             this.spring = options.spring + (Math.random() * 0.1) - 0.05;
@@ -159,21 +163,27 @@
       // ----------------------------------------------------------------------------------------
 
       window.requestAnimFrame = (function () {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (fn) { window.setTimeout(fn, 1000 / 60) };
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame
+          || window.mozRequestAnimationFrame || function (fn) {
+            window.setTimeout(fn, 1000 / 60)
+          };
       })();
       function resize() {
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
       }
+
       function start() {
         if (!ctx.running) {
           ctx.running = true;
           loop();
         }
       }
+
       function stop() {
         ctx.running = false;
       }
+
       function mousemove(event) {
         if (event.touches) {
           target.x = event.touches[0].pageX;
@@ -185,6 +195,7 @@
 
         event.preventDefault();
       }
+
       function reset() {
         tendrils = [];
         for (var i = 0; i < settings.trails; i++) {
@@ -193,6 +204,7 @@
           }));
         }
       }
+
       function loop() {
         if (!ctx.running) return;
         ctx.globalCompositeOperation = 'source-over';
@@ -202,7 +214,8 @@
         ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
         ctx.lineWidth = 1;
         if (ctx.frame % 60 == 0) {
-          console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency, hue.amplitude);
+          console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency,
+            hue.amplitude);
         }
         for (var i = 0, tendril; i < settings.trails; i++) {
           tendril = tendrils[i];
@@ -211,14 +224,18 @@
         }
         ctx.frame++;
         ctx.stats.update();
-        requestAnimFrame(loop);
+        if (_this.initTrue) {
+          requestAnimFrame(loop);
+        }
       }
+
       function touchstart(event) {
         if (event.touches.length == 1) {
           target.x = event.touches[0].pageX;
           target.y = event.touches[0].pageY;
         }
       }
+
       function init(event) {
         document.removeEventListener('mousemove', init);
         document.removeEventListener('touchstart', init);
@@ -229,6 +246,7 @@
         reset();
         loop();
       }
+
       function keyup(event) {
         switch (event.keyCode) {
           case 32:
@@ -237,6 +255,7 @@
           default:
         }
       }
+
       function save() {
         if (!buffer) {
           buffer = document.createElement('canvas');
@@ -263,10 +282,12 @@
           logo.width / 2,
           logo.height / 2
         );
-        window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
+        window.open(buffer.toDataURL(), 'wallpaper',
+          'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
       }
+
       ctx = document.getElementById('canvas').getContext('2d');
-      ctx.stats =  Stats();
+      ctx.stats = Stats();
       ctx.running = true;
       ctx.frame = 1;
       hue = new Oscillator({
@@ -293,11 +314,59 @@
         document.body.appendChild(ctx.stats.domElement);
       }
     },
+
     methods: {
+
+      meteor(){
+        let canvas4 = document.getElementById('canvas'),
+          ctx3 = canvas4.getContext('2d'),
+          width = window.innerWidth,
+          height = window.innerHeight,
+          //实例化月亮和星星。流星是随机时间生成，所以只初始化数组
+          moon = new Moon(ctx3, width, height),
+          stars = new Star(ctx3, width, height, 200),
+          meteors = [],
+          count = 0
+
+        canvas4.width = width;
+        canvas4.height = height;
+
+        const meteorGenerator = ()=> {
+          //x位置偏移，以免经过月亮
+          let x = Math.random() * width + 800
+          meteors.push(new Meteor(ctx3, x, height))
+
+          //每隔随机时间，生成新流星
+          setTimeout(()=> {
+            meteorGenerator()
+
+          }, Math.random() * 2000)
+        }
+
+        const frame = ()=>{
+          count++
+          count % 10 == 0 && stars.blink()
+          moon.draw()
+          stars.draw()
+
+          meteors.forEach((meteor, index, arr)=> {
+            //如果流星离开视野之内，销毁流星实例，回收内存
+            if (meteor.flow()) {
+              meteor.draw()
+            } else {
+              arr.splice(index, 1)
+            }
+          })
+          requestAnimationFrame(frame)
+        }
+        meteorGenerator()
+        frame()
+      },
       follow(){
 
       },
       universe(){
+        const _this = this;
         var ctx;
         ctx = document.getElementById('canvas').getContext('2d');
         w = window.innerWidth;
@@ -393,57 +462,15 @@
           for (var i = 1, l = stars.length; i < l; i++) {
             stars[i].draw();
           };
+          if(_this.initTrue){
+            window.requestAnimationFrame(animation);
+          }
 
-          window.requestAnimationFrame(animation);
         }
 
         animation();
       },
-      meteor(){
-        let canvas4 = document.getElementById('canvas'),
-          ctx3 = canvas4.getContext('2d'),
-          width = window.innerWidth,
-          height = window.innerHeight,
-          //实例化月亮和星星。流星是随机时间生成，所以只初始化数组
-          moon = new Moon(ctx3, width, height),
-          stars = new Star(ctx3, width, height, 200),
-          meteors = [],
-          count = 0
-
-        canvas4.width = width;
-        canvas4.height = height;
-
-        const meteorGenerator = ()=> {
-          //x位置偏移，以免经过月亮
-          let x = Math.random() * width + 800
-          meteors.push(new Meteor(ctx3, x, height))
-
-          //每隔随机时间，生成新流星
-          setTimeout(()=> {
-            meteorGenerator()
-
-          }, Math.random() * 2000)
-        }
-
-        const frame = ()=>{
-          count++
-          count % 10 == 0 && stars.blink()
-          moon.draw()
-          stars.draw()
-
-          meteors.forEach((meteor, index, arr)=> {
-            //如果流星离开视野之内，销毁流星实例，回收内存
-            if (meteor.flow()) {
-              meteor.draw()
-            } else {
-              arr.splice(index, 1)
-            }
-          })
-          requestAnimationFrame(frame)
-        }
-        meteorGenerator()
-        frame()
-      },
+      //...mapMutations({setData: 'setUserData'}),
       customerLogin() {
         this.login = true
         this.customer = true
@@ -454,8 +481,7 @@
         const _this = this;
        // _this.setData({id:"adsd"});
 
-        document.removeEventListener('mousemove', {});
-        document.removeEventListener('touchstart', {});
+       // _this.initTrue = false;
         this.$store.commit('setUserData', JSON.stringify(new Date()));
         //this.$store.commit('setUserData',JSON.stringify(new Date()));
        //storage.setItem('userData', JSON.stringify(new Date()));
@@ -465,9 +491,9 @@
         this.login = false
         this.customer = false
         this.admin = false
-      }
+      },
     }
-  };
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -601,6 +627,18 @@
     left: 50%;
     transform: translateX(-50%);
     background: url('../../assets/images/top_logo.png') no-repeat;
+  }
+  .logo-bg1 {
+    width: 800px;
+    height: 200px;
+    position: absolute;
+    z-index: 10000;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font: 18px/43px 'microsoft yahei';
+   // color: rgb(25,156,196);
+    color: rgb(25,137,171)
   }
   .nav {
     width: 200px;
