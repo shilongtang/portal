@@ -11,6 +11,7 @@ import login from '../apps/login/desktop.vue';
 
 import login1 from '../apps/login/login.vue'
 
+import regist from '@/apps/login/regist.vue';
 //import commons from '../utils/treeUtils';
 import index from '../apps/index/desktop';
 import HelloWorld from '../components/HelloWorld'
@@ -174,11 +175,19 @@ export default new Promise((resolve, reject) => {
           hidden:true,
           component: login,
           children : [{
+            //登陆界面
             name: 'login1',
             path: '/login1',
             hidden:true,
             component:  resolve => require(['@/apps/login/login.vue'],resolve)
-          }]
+          },{
+            //注册界面
+            name: 'regist',
+            path: '/regist',
+            hidden:true,
+            component:  resolve => require(['@/apps/login/regist.vue'],resolve)
+          }
+          ]
         },
       ],
     });
@@ -195,6 +204,8 @@ export default new Promise((resolve, reject) => {
         } else {
         //  debugger
           if(to.name === "login1"){
+            next();
+          }else if(to.name === "regist"){
             next();
           }else{
             next('/login');

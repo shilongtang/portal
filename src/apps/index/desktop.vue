@@ -24,6 +24,7 @@
     methods:{
       buttonClick(){
         console.log($("#xxx").val());
+        console.log(this.$message)
         this.$message.success('...'+$("#xxx").val());
       }
     },

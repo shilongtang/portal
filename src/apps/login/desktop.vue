@@ -5,7 +5,7 @@
         <div v-show="!login">
           <div class="logo-bg"></div>
           <div class="nav">
-            <router-link to="/customer-login">
+            <router-link :to="{name:nameList.menu_1,params:{id:2}}">
               <a class="gv" href="javascript:;" @click="customerLogin()">客户登录</a>
             </router-link>
             <router-link :to="{name:nameList.menu_1,params:{id:1}}">

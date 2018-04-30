@@ -6,22 +6,22 @@
 			<form>
 				<div class="ipunt-wrap" v-show="admin">
           <div style="float: left;height: 60px"><i style="height: 100%; margin-top: 39px;margin-right: 20px" class="fa fa-id-card-o"></i></div>
-          <div style="float: left"><el-input class="ipunt-wrap" id="id"  v-popover:popover1></el-input></div>
+          <div style="float: left"><el-input placeholder="账号" class="ipunt-wrap" id="id"  v-popover:popover1></el-input></div>
           <!--  <input type="text" id="ID" placeholder="账号" v-model="userid">-->
 				</div>
 				<div class="ipunt-wrap">
           <div style="float: left;height: 60px"><i style="height: 100%; margin-top: 39px;margin-right: 20px" class="fa fa-user-o"></i></div>
-          <div style="float: left"><el-input class="ipunt-wrap" id="account"  v-popover:popover2></el-input></div>
+          <div style="float: left"><el-input placeholder="用户名"  class="ipunt-wrap" id="account"  v-popover:popover2></el-input></div>
         </div>
 				<div>
           <div style="float: left;height: 60px"><i style="height: 100%; margin-top: 39px;margin-right: 20px" class="fa fa-key fa-fw"></i></div>
-          <div style="float: left"><el-input class="ipunt-wrap" id="password"  v-popover:popover3></el-input></div>
+          <div style="float: left"><el-input placeholder="密码" class="ipunt-wrap" id="password"  v-popover:popover3></el-input></div>
         </div>
 				<div class="button">
 					<a class="gv" href="javascript:;" @click="submitLogin()">登录</a>
 				</div>
 				<div class="toregist" v-show="customer">
-					还没有账号？<router-link to="/regist"><a href="javascript:;">去注册</a></router-link>
+					还没有账号？<router-link :to="{name:'regist'}"><a href="javascript:;">去注册</a></router-link>
 				</div>
 			</form>
 		</div>
@@ -72,9 +72,15 @@ export default {
 			password: '',
 			userid: '',
 			dialog: false,
+      id:this.$route.params.id,
 		}
 	},
   mounted(){
+	  console.log()
+    //this.$message(this.id);
+	 console.log(this.$message);
+    // this.$message.error(this.id);
+    this.$message.error(this.id+"")
 	  console.log(keyboard);
     $('.keyboard1').keyboard({audio:audio});
     $('.keyboard2').keyboard({audio:audio});
