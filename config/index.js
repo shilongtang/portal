@@ -14,7 +14,7 @@ proxyTable[context] = {
   target,
   changeOrigin: true
 }
-proxyTable['/menu'] = {
+proxyTable['/long-'] = {
   target,
   changeOrigin: true
 }
