@@ -44,6 +44,11 @@
     },
     mounted() {
       const _this = this;
+      console.log("%c郭嘉宾还钱~","font-size:30px;color:white;background:deeppink;border-radius:2px;")
+      console.log("%c哇哇哇哇哇还钱！","font-size:30px;background:linear-gradient(to bottom,deeppink,pink,orange);;border-radius:4px;")
+      //console.log("%c看兔斯基！！！","font-size:30px;color:white;text-shadow:2px 2px 1px gold")
+      console.log("%c","padding:120px 120px;line-height:100px;background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1487679947503&di=089b71b243d7805692f6af9fea7247ba&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fblog%2F201408%2F20%2F20140820122446_kHVcj.gif') no-repeat")
+      //console.log("%c","padding-top:120px ;height:500px;background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526015452677&di=43f2611f347c42ee7abadbed72b89e33&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170107%2F9cf4d1b2bf374b3580092bca7846f044.jpg') no-repeat")
       //流星特效
       _this.meteor();
       //宇宙特效

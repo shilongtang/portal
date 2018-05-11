@@ -20,6 +20,9 @@
 				<div class="button">
 					<a class="gv" href="javascript:;" @click="submitLogin()">登录</a>
 				</div>
+        <div class="toregist1" v-show="customer">
+          快速登录:  <i href="https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect" style="margin-left: 10px" class="fa fa-qq"></i>  <i @click="quickSubmit('WEIXIN')" style="margin-left: 10px" class="fa fa-weixin"></i>   <i @click="quickSubmit('WEIBO')" style="margin-left: 10px" class="fa fa-weibo"></i>
+        </div>
 				<div class="toregist" v-show="customer">
 					还没有账号？<router-link :to="{name:'regist'}"><a href="javascript:;">去注册</a></router-link>
 				</div>
@@ -77,16 +80,16 @@ export default {
 	},
   mounted(){
 	  console.log()
-    //this.$message(this.id);
-	 console.log(this.$message);
-    // this.$message.error(this.id);
-    this.$message.error(this.id+"")
+    //this.$message.error(this.id+"")
 	  console.log(keyboard);
     $('.keyboard1').keyboard({audio:audio});
     $('.keyboard2').keyboard({audio:audio});
     $('.keyboard3').keyboard({audio:audio});
   },
 	methods: {
+    quickSubmit(type){
+     console.warn(type);
+    },
 		back() {
       history.go(-1);
 			this.$emit('back')
@@ -288,7 +291,14 @@ a.gv:hover {
 	font-size: 12px;
 	float: right;
 	padding-top: 20px;
+  margin-left: 5px;
 	color: #fff;
+}
+.toregist1{
+    font-size: 14px;
+    float: left;
+    padding-top: 20px;
+    color: #fff;
 }
 .toregist a{
 	color: #066197;
