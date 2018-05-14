@@ -2,8 +2,8 @@ import desktop from './desktop.vue';
 
 const menuList = [
   {
-    name: 'mm',
-    path: '/mm',
+    name: 'Demo',
+    path: '/Demo',
     component: desktop,
   },
 ];

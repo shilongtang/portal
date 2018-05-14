@@ -113,14 +113,13 @@ export default {
       }
 
 			if (this.customer) {
-				if (!this.username || !this.password) {
-					this.dialog = true
-					return
-				}
 				var user = {
-					username: this.username,
-					password: this.password
+					username: "username",
+					password: "password"
 				}
+        _this.$store.commit('setUserData', JSON.stringify(user));
+        storage.setItem('userData', JSON.stringify(user));
+        _this.$router.push({name:"main"})
 			}
 
 		}
